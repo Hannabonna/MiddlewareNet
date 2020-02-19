@@ -1,2 +1,16 @@
 2/19/2020 11:38:28 AM Started GET /topic/ for localhost:5000 
 2/19/2020 11:38:28 AM Completed 403 /topic/ for /topic/ not allowed for localhost:5000 
+2/19/2020 11:42:55 AM Started GET /topic/ for localhost:5000 
+2/19/2020 11:42:55 AM Completed 403 /topic/ for /topic/ not allowed for localhost:5000 
+2/19/2020 11:45:58 AM Started GET /topic/ for localhost:5000 
+2/19/2020 11:45:58 AM Completed 200 /topic/ for /topic/ not allowed for localhost:5000 
+2/19/2020 11:46:45 AM Started GET /topic/ for localhost:5000 
+2/19/2020 11:46:45 AM Completed 200 /topic/ for /topic/ not allowed for localhost:5000 
+2/19/2020 11:47:34 AM Started GET /topic/ for localhost:5000 
+2/19/2020 11:47:34 AM Completed 403 /topic/ for /topic/ not allowed for localhost:5000 
+2/19/2020 11:50:28 AM Started GET /topic/ for localhost:5000 
+2/19/2020 11:50:28 AM Completed 403 /topic/ for /topic/ not allowed for localhost:5000 
+2/19/2020 11:51:30 AM Started GET /topic/ for localhost:5001 
+2/19/2020 11:51:30 AM Completed 200 /topic/ for /topic/ allowed for localhost:5001 
+2/19/2020 11:51:51 AM Started GET /topic/ for localhost:5000 
+2/19/2020 11:51:51 AM Completed 403 /topic/ for /topic/ not allowed for localhost:5000 

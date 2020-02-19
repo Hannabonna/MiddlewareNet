@@ -31,7 +31,9 @@ namespace MiddlewareNet.Middleware
             }
             else
             {
-                 await _next(context);
+                var stat = context.Response.StatusCode.ToString();
+                IILog.SuccessLog (stat, met, path, host);
+                await _next(context);
             }
         }
     }
@@ -49,6 +51,15 @@ namespace MiddlewareNet.Middleware
         {
             File.AppendAllText(@"/Users/gigaming/MiddlewareNet/App.log", $"{DateTime.Now} Started {a} {reqPath} for {reqHost} \n");
             File.AppendAllText(@"/Users/gigaming/MiddlewareNet/App.log", $"{DateTime.Now} Completed {status} {reqPath} for {reqPath} not allowed for {reqHost} \n");
+        }
+    }
+
+    public class IILog
+    {
+        public static void SuccessLog(string status, string a, string reqPath, string reqHost)
+        {
+            File.AppendAllText(@"/Users/gigaming/MiddlewareNet/App.log", $"{DateTime.Now} Started {a} {reqPath} for {reqHost} \n");
+            File.AppendAllText(@"/Users/gigaming/MiddlewareNet/App.log", $"{DateTime.Now} Completed {status} {reqPath} for {reqPath} allowed for {reqHost} \n");
         }
     }
 }
