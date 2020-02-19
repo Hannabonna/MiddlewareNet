@@ -39,7 +39,7 @@ namespace MiddlewareNet
 
             // app.UseHttpsRedirection();
 
-            app.UseCustomAuthMiddleware();
+            app.UsingMiddleware();
 
             app.UseRouting();
 

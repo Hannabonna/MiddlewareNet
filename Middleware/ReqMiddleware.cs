@@ -2,39 +2,53 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
+using System;
+using System.IO;
 
 namespace MiddlewareNet.Middleware
 {
-    public class CustomAuthMiddleware
+    public class Middleware
     {
         public readonly RequestDelegate _next;
 
-        public CustomAuthMiddleware(RequestDelegate next)
+        public Middleware(RequestDelegate next)
         {
             _next = next;
         }
 
         public async Task InvokeAsync(HttpContext context)
         {
-            if (context.Request.Headers["Authorization"] == "hello")
+            var startTime = DateTime.Now;
+            var met = context.Request.Method.ToString();
+            var path = context.Request.Path.ToString();
+            var host = context.Request.Host.ToString();
+            
+            if (context.Request.Host.ToString() == "localhost:5000")
             {
-                await _next(context);
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                var stat = context.Response.StatusCode.ToString();
+                ILog.Logging (stat, met, path, host);
             }
             else
             {
-                var text = "Not Authorized";
-            
-                var data = System.Text.Encoding.UTF8.GetBytes(text);
-                await context.Response.Body.WriteAsync(data, 0, data.Length);
+                 await _next(context);
             }
-           
         }
     }
-    public static class AuthMiddlewareExtension
+    public static class MiddlewareExtension
     {
-        public static IApplicationBuilder UseCustomAuthMiddleware(this IApplicationBuilder builder)
+        public static IApplicationBuilder UsingMiddleware(this IApplicationBuilder builder)
         {
-            return builder.UseMiddleware<CustomAuthMiddleware>();
+            return builder.UseMiddleware<Middleware>();
+        }
+    }
+
+    public class ILog
+    {
+        public static void Logging(string status, string a, string reqPath, string reqHost)
+        {
+            File.AppendAllText(@"/Users/gigaming/MiddlewareNet/App.log", $"{DateTime.Now} Started {a} {reqPath} for {reqHost} \n");
+            File.AppendAllText(@"/Users/gigaming/MiddlewareNet/App.log", $"{DateTime.Now} Completed {status} {reqPath} for {reqPath} not allowed for {reqHost} \n");
         }
     }
 }
